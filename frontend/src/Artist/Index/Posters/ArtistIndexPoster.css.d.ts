@@ -5,6 +5,7 @@ interface CssExports {
   'container': string;
   'content': string;
   'controls': string;
+  'controlsAlwaysVisible': string;
   'ended': string;
   'link': string;
   'nextAlbum': string;

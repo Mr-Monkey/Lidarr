@@ -132,7 +132,9 @@ function ArtistIndexBanner(props: ArtistIndexBannerProps) {
   return (
     <div className={styles.content}>
       <div className={styles.bannerContainer}>
-        {isSelectMode ? <ArtistIndexPosterSelect artistId={artistId} /> : null}
+        {isSelectMode ? (
+          <ArtistIndexPosterSelect artistId={artistId} link={link} />
+        ) : null}
 
         <Label className={styles.controls}>
           <SpinnerIconButton

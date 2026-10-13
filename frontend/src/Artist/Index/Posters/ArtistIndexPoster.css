@@ -83,6 +83,12 @@ $hoverScale: 1.05;
   transition: opacity 0;
 }
 
+.controlsAlwaysVisible {
+  composes: controls;
+
+  opacity: 0.9;
+}
+
 .action {
   composes: button from '~Components/Link/IconButton.css';
 

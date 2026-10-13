@@ -54,6 +54,7 @@ function ArtistIndexPosterOptionsModalContent(
     showQualityProfile,
     showNextAlbum,
     showSearchAction,
+    alwaysShowActions,
   } = posterOptions;
 
   const dispatch = useDispatch();
@@ -151,6 +152,18 @@ function ArtistIndexPosterOptionsModalContent(
               name="showSearchAction"
               value={showSearchAction}
               helpText={translate('ShowSearchActionHelpText')}
+              onChange={onPosterOptionChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>{translate('AlwaysShowActions')}</FormLabel>
+
+            <FormInputGroup
+              type={inputTypes.CHECK}
+              name="alwaysShowActions"
+              value={alwaysShowActions}
+              helpText={translate('AlwaysShowActionsHelpText')}
               onChange={onPosterOptionChange}
             />
           </FormGroup>

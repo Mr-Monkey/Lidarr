@@ -47,6 +47,7 @@ function ArtistIndexPoster(props: ArtistIndexPosterProps) {
     showQualityProfile,
     showNextAlbum,
     showSearchAction,
+    alwaysShowActions,
   } = useSelector(selectPosterOptions);
 
   const { showRelativeDates, shortDateFormat, longDateFormat, timeFormat } =
@@ -132,13 +133,19 @@ function ArtistIndexPoster(props: ArtistIndexPosterProps) {
   return (
     <div className={styles.content}>
       <div className={styles.posterContainer}>
-        {isSelectMode ? <ArtistIndexPosterSelect artistId={artistId} /> : null}
+        {isSelectMode ? (
+          <ArtistIndexPosterSelect artistId={artistId} link={link} />
+        ) : null}
 
-        <Label className={styles.controls}>
+        <Label
+          className={
+            alwaysShowActions ? styles.controlsAlwaysVisible : styles.controls
+          }
+        >
           <SpinnerIconButton
             className={styles.action}
             name={icons.REFRESH}
-            itle={translate('RefreshArtist')}
+            title={translate('RefreshArtist')}
             isSpinning={isRefreshingArtist}
             onPress={onRefreshPress}
           />

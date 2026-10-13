@@ -140,7 +140,7 @@ function ArtistIndexOverview(props: ArtistIndexOverviewProps) {
         <div className={styles.poster}>
           <div className={styles.posterContainer}>
             {isSelectMode ? (
-              <ArtistIndexPosterSelect artistId={artistId} />
+              <ArtistIndexPosterSelect artistId={artistId} link={link} />
             ) : null}
 
             {status === 'ended' && (

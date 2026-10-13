@@ -3,14 +3,16 @@ import { useSelect } from 'App/SelectContext';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link/Link';
 import { icons } from 'Helpers/Props';
+import translate from 'Utilities/String/translate';
 import styles from './ArtistIndexPosterSelect.css';
 
 interface ArtistIndexPosterSelectProps {
   artistId: number;
+  link: string;
 }
 
 function ArtistIndexPosterSelect(props: ArtistIndexPosterSelectProps) {
-  const { artistId } = props;
+  const { artistId, link } = props;
   const [selectState, selectDispatch] = useSelect();
   const isSelected = selectState.selectedState[artistId];
 
@@ -30,15 +32,28 @@ function ArtistIndexPosterSelect(props: ArtistIndexPosterSelectProps) {
   );
 
   return (
-    <Link className={styles.checkButton} onPress={onSelectPress}>
-      <span className={styles.checkContainer}>
-        <Icon
-          className={isSelected ? styles.selected : styles.unselected}
-          name={isSelected ? icons.CHECK_CIRCLE : icons.CIRCLE_OUTLINE}
-          size={20}
-        />
-      </span>
-    </Link>
+    <>
+      <Link
+        className={isSelected ? styles.overlaySelected : styles.overlay}
+        onPress={onSelectPress}
+      >
+        <span className={styles.checkContainer}>
+          <Icon
+            className={isSelected ? styles.selected : styles.unselected}
+            name={isSelected ? icons.CHECK_CIRCLE : icons.CIRCLE_OUTLINE}
+            size={20}
+          />
+        </span>
+      </Link>
+
+      <Link
+        className={styles.openButton}
+        to={link}
+        title={translate('OpenArtist')}
+      >
+        <Icon name={icons.ARROW_RIGHT} size={20} />
+      </Link>
+    </>
   );
 }
 

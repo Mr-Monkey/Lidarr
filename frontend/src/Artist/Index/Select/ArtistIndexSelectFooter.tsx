@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useSelect } from 'App/SelectContext';
 import AppState from 'App/State/AppState';
-import { RENAME_ARTIST, RETAG_ARTIST } from 'Commands/commandNames';
+import {
+  ARTIST_SEARCH,
+  RENAME_ARTIST,
+  RETAG_ARTIST,
+} from 'Commands/commandNames';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import PageContentFooter from 'Components/Page/PageContentFooter';
 import usePrevious from 'Helpers/Hooks/usePrevious';
@@ -12,6 +16,7 @@ import {
   saveArtistEditor,
   updateArtistsMonitor,
 } from 'Store/Actions/artistActions';
+import { executeCommand } from 'Store/Actions/commandActions';
 import { fetchRootFolders } from 'Store/Actions/settingsActions';
 import createCommandExecutingSelector from 'Store/Selectors/createCommandExecutingSelector';
 import translate from 'Utilities/String/translate';
@@ -55,6 +60,9 @@ function ArtistIndexSelectFooter() {
   const isRetaggingArtist = useSelector(
     createCommandExecutingSelector(RETAG_ARTIST)
   );
+  const isSearchingArtist = useSelector(
+    createCommandExecutingSelector(ARTIST_SEARCH)
+  );
 
   const dispatch = useDispatch();
 
@@ -67,6 +75,7 @@ function ArtistIndexSelectFooter() {
   const [isSavingArtist, setIsSavingArtist] = useState(false);
   const [isSavingTags, setIsSavingTags] = useState(false);
   const [isSavingMonitoring, setIsSavingMonitoring] = useState(false);
+  const [isSavingMonitored, setIsSavingMonitored] = useState(false);
   const previousIsDeleting = usePrevious(isDeleting);
 
   const [selectState, selectDispatch] = useSelect();
@@ -100,6 +109,39 @@ function ArtistIndexSelectFooter() {
     },
     [artistIds, dispatch]
   );
+
+  const onSearchPress = useCallback(() => {
+    artistIds.forEach((artistId) => {
+      dispatch(
+        executeCommand({
+          name: ARTIST_SEARCH,
+          artistId,
+        })
+      );
+    });
+  }, [artistIds, dispatch]);
+
+  const onMonitoredPress = useCallback(
+    (monitored: boolean) => {
+      setIsSavingMonitored(true);
+
+      dispatch(
+        saveArtistEditor({
+          artistIds,
+          monitored,
+        })
+      );
+    },
+    [artistIds, dispatch]
+  );
+
+  const onMonitorPress = useCallback(() => {
+    onMonitoredPress(true);
+  }, [onMonitoredPress]);
+
+  const onUnmonitorPress = useCallback(() => {
+    onMonitoredPress(false);
+  }, [onMonitoredPress]);
 
   const onOrganizePress = useCallback(() => {
     setIsOrganizeModalOpen(true);
@@ -177,6 +219,7 @@ function ArtistIndexSelectFooter() {
       setIsSavingArtist(false);
       setIsSavingTags(false);
       setIsSavingMonitoring(false);
+      setIsSavingMonitored(false);
     }
   }, [isSaving]);
 
@@ -196,6 +239,30 @@ function ArtistIndexSelectFooter() {
     <PageContentFooter className={styles.footer}>
       <div className={styles.buttons}>
         <div className={styles.actionButtons}>
+          <SpinnerButton
+            isSpinning={isSearchingArtist}
+            isDisabled={!anySelected || isSearchingArtist}
+            onPress={onSearchPress}
+          >
+            {translate('Search')}
+          </SpinnerButton>
+
+          <SpinnerButton
+            isSpinning={isSaving && isSavingMonitored}
+            isDisabled={!anySelected || isOrganizingArtist || isRetaggingArtist}
+            onPress={onMonitorPress}
+          >
+            {translate('Monitor')}
+          </SpinnerButton>
+
+          <SpinnerButton
+            isSpinning={isSaving && isSavingMonitored}
+            isDisabled={!anySelected || isOrganizingArtist || isRetaggingArtist}
+            onPress={onUnmonitorPress}
+          >
+            {translate('Unmonitor')}
+          </SpinnerButton>
+
           <SpinnerButton
             isSpinning={isSaving && isSavingArtist}
             isDisabled={!anySelected || isOrganizingArtist || isRetaggingArtist}

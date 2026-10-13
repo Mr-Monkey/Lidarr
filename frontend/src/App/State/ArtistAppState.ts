@@ -22,6 +22,7 @@ export interface ArtistIndexAppState {
     showQualityProfile: boolean;
     showNextAlbum: boolean;
     showSearchAction: boolean;
+    alwaysShowActions: boolean;
   };
 
   bannerOptions: {

@@ -30,7 +30,8 @@ export const defaultState = {
     showMonitored: true,
     showQualityProfile: true,
     showNextAlbum: true,
-    showSearchAction: false
+    showSearchAction: false,
+    alwaysShowActions: false
   },
 
   bannerOptions: {
