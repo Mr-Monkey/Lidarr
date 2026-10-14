@@ -108,15 +108,21 @@ function StandardStats({ stats }: { stats: LibraryStats }) {
         />
       </div>
 
+      <div className={styles.caption}>
+        {translate('LibraryPercentComplete', {
+          percent: stats.percentComplete,
+        })}
+      </div>
+
       <div className={styles.row}>
         <span className={styles.label}>{translate('SizeOnDisk')}</span>
         <span className={styles.value}>{formatBytes(stats.sizeOnDisk)}</span>
       </div>
 
+      <div className={styles.header}>{translate('Formats')}</div>
+
       {segments.length ? (
         <>
-          <div className={styles.header}>{translate('Formats')}</div>
-
           <div className={styles.formatBar}>
             {segments.map((segment, index) => (
               <div
@@ -138,12 +144,14 @@ function StandardStats({ stats }: { stats: LibraryStats }) {
             </div>
           ))}
 
-          <div className={styles.row}>
-            <span className={styles.label}>{translate('Lossless')}</span>
-            <span className={styles.value}>{stats.losslessPercent}%</span>
+          <div className={styles.losslessRow}>
+            <span>{translate('Lossless')}</span>
+            <span>{stats.losslessPercent}%</span>
           </div>
         </>
-      ) : null}
+      ) : (
+        <div className={styles.caption}>{translate('NoTrackFilesYet')}</div>
+      )}
     </div>
   );
 }
