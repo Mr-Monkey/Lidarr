@@ -1,0 +1,183 @@
+.standard {
+  margin: 20px 24px 10px;
+  color: var(--sidebarColor);
+  font-size: $smallFontSize;
+}
+
+.header {
+  margin: 12px 0 6px;
+  color: var(--white);
+  font-weight: bold;
+  font-size: $defaultFontSize;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  line-height: 20px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  color: var(--helpTextColor);
+}
+
+.value {
+  color: var(--sidebarColor);
+}
+
+.progress {
+  overflow: hidden;
+  margin: 2px 0 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--sidebarActiveBackgroundColor);
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--lidarrGreen);
+}
+
+.formatBar {
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 6px;
+  height: 10px;
+  border-radius: 3px;
+  background-color: var(--sidebarActiveBackgroundColor);
+
+  .segment0,
+  .segment1,
+  .segment2,
+  .segmentOther {
+    margin-right: 0;
+    width: auto;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+.segment0,
+.segment1,
+.segment2,
+.segmentOther {
+  display: inline-block;
+  margin-right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.segment0 {
+  background-color: var(--lidarrGreen);
+}
+
+.segment1 {
+  background-color: var(--primaryColor);
+}
+
+.segment2 {
+  background-color: var(--warningColor);
+}
+
+.segmentOther {
+  background-color: var(--helpTextColor);
+}
+
+/* neofetch-style */
+
+.fetch {
+  margin: 20px 12px 10px;
+  color: var(--sidebarColor);
+  font-size: 11px;
+  font-family: $monoSpaceFontFamily;
+  line-height: 16px;
+}
+
+.logo {
+  margin: 0 0 8px;
+  color: var(--lidarrGreen);
+  font-weight: bold;
+  font-size: 11px;
+  font-family: $monoSpaceFontFamily;
+  line-height: 13px;
+}
+
+.fetchTitle {
+  font-weight: bold;
+}
+
+.fetchRule {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.fetchLine {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+}
+
+.fetchKey {
+  color: var(--lidarrGreen);
+  font-weight: bold;
+}
+
+.fetchValue {
+  color: var(--sidebarColor);
+}
+
+.palette {
+  display: flex;
+  margin-top: 8px;
+
+  span {
+    width: 18px;
+    height: 12px;
+  }
+}
+
+.color0 {
+  background-color: #000;
+}
+
+.color1 {
+  background-color: var(--dangerColor);
+}
+
+.color2 {
+  background-color: var(--lidarrGreen);
+}
+
+.color3 {
+  background-color: var(--warningColor);
+}
+
+.color4 {
+  background-color: var(--primaryColor);
+}
+
+.color5 {
+  background-color: #b05cd9;
+}
+
+.color6 {
+  background-color: #3cbcbc;
+}
+
+.color7 {
+  background-color: var(--sidebarColor);
+}
+
+@media only screen and (max-width: $breakpointSmall) {
+  .standard,
+  .fetch {
+    display: none;
+  }
+}

@@ -24,6 +24,7 @@ namespace Lidarr.Api.V1.Config
         public bool ExpandBroadcastByDefault { get; set; }
         public bool ExpandOtherByDefault { get; set; }
         public string Theme { get; set; }
+        public string SidebarLibraryStats { get; set; }
     }
 
     public static class UiConfigResourceMapper
@@ -48,7 +49,8 @@ namespace Lidarr.Api.V1.Config
                 ExpandEPByDefault = model.ExpandEPByDefault,
                 ExpandBroadcastByDefault = model.ExpandBroadcastByDefault,
                 ExpandOtherByDefault = model.ExpandOtherByDefault,
-                Theme = config.Theme
+                Theme = config.Theme,
+                SidebarLibraryStats = model.SidebarLibraryStats
             };
         }
     }

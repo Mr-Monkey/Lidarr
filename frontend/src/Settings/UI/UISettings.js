@@ -42,6 +42,27 @@ const longDateFormatOptions = [
   { key: 'dddd, D MMMM YYYY', value: 'Tuesday, 25 March, 2014' }
 ];
 
+const sidebarLibraryStatsOptions = [
+  {
+    key: 'off',
+    get value() {
+      return translate('SidebarLibraryStatsOff');
+    }
+  },
+  {
+    key: 'standard',
+    get value() {
+      return translate('SidebarLibraryStatsStandard');
+    }
+  },
+  {
+    key: 'fetch',
+    get value() {
+      return translate('SidebarLibraryStatsFetch');
+    }
+  }
+];
+
 export const timeFormatOptions = [
   { key: 'h(:mm)a', value: '5pm/5:30pm' },
   { key: 'HH:mm', value: '17:00/17:30' }
@@ -196,6 +217,18 @@ class UISettings extends Component {
                       values={themeOptions}
                       onChange={onInputChange}
                       {...settings.theme}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormLabel>{translate('SidebarLibraryStats')}</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.SELECT}
+                      name="sidebarLibraryStats"
+                      helpText={translate('SidebarLibraryStatsHelpText')}
+                      values={sidebarLibraryStatsOptions}
+                      onChange={onInputChange}
+                      {...settings.sidebarLibraryStats}
                     />
                   </FormGroup>
 

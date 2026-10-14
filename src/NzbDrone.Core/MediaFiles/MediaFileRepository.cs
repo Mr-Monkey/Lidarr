@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Dapper;
 using NzbDrone.Common;
 using NzbDrone.Core.Datastore;
 using NzbDrone.Core.Messaging.Events;
@@ -19,6 +20,7 @@ namespace NzbDrone.Core.MediaFiles
         TrackFile GetFileWithPath(string path);
         void DeleteFilesByAlbum(int albumId);
         void UnlinkFilesByAlbum(int albumId);
+        List<TrackFileQualitySize> GetQualityAndSize();
     }
 
     public class MediaFileRepository : BasicRepository<TrackFile>, IMediaFileRepository
@@ -136,6 +138,15 @@ namespace NzbDrone.Core.MediaFiles
 
             var joined = all.Join(paths, x => x.Path, x => x, (file, path) => file, PathEqualityComparer.Instance).ToList();
             return joined;
+        }
+
+        public List<TrackFileQualitySize> GetQualityAndSize()
+        {
+            // Only the two columns needed for library stats, so this stays cheap on large libraries
+            using (var conn = _database.OpenConnection())
+            {
+                return conn.Query<TrackFileQualitySize>("SELECT \"Quality\", \"Size\" FROM \"TrackFiles\"").ToList();
+            }
         }
 
         private TrackFile MapTrack(Dictionary<int, TrackFile> dict, TrackFile file, Track track)

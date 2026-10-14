@@ -69,6 +69,7 @@ namespace NzbDrone.Core.Configuration
         bool ExpandEPByDefault { get; set; }
         bool ExpandBroadcastByDefault { get; set; }
         bool ExpandOtherByDefault { get; set; }
+        string SidebarLibraryStats { get; set; }
 
         // Internal
         bool CleanupMetadataImages { get; set; }

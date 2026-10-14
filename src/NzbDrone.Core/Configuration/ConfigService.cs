@@ -368,6 +368,13 @@ namespace NzbDrone.Core.Configuration
             set { SetValue("UILanguage", value); }
         }
 
+        public string SidebarLibraryStats
+        {
+            get { return GetValue("SidebarLibraryStats", "off"); }
+
+            set { SetValue("SidebarLibraryStats", value); }
+        }
+
         public bool ExpandAlbumByDefault
         {
             get { return GetValueBoolean("ExpandAlbumByDefault", false); }

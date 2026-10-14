@@ -11,6 +11,7 @@ import locationShape from 'Helpers/Props/Shapes/locationShape';
 import dimensions from 'Styles/Variables/dimensions';
 import HealthStatusConnector from 'System/Status/Health/HealthStatusConnector';
 import translate from 'Utilities/String/translate';
+import PageSidebarLibraryStats from './LibraryStats/PageSidebarLibraryStats';
 import MessagesConnector from './Messages/MessagesConnector';
 import PageSidebarItem from './PageSidebarItem';
 import styles from './PageSidebar.css';
@@ -512,6 +513,8 @@ class PageSidebar extends Component {
               })
             }
           </div>
+
+          <PageSidebarLibraryStats />
 
           <MessagesConnector />
         </ScrollerComponent>
